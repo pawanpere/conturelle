@@ -107,3 +107,25 @@ body {
 .pc4 { background: linear-gradient(145deg, #260e20, #3a1028, #2a0c1e); }
 .pc5 { background: linear-gradient(145deg, #2e1028, #1e0820, #3a102e); }
 .pc6 { background: linear-gradient(145deg, #280e20, #3c1028, #1a0818); }
+
+/* Chat trigger pulse */
+@keyframes chatPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,169,110,0.2); }
+  50% { box-shadow: 0 0 0 8px rgba(201,169,110,0); }
+}
+
+/* Mobile bottom padding to account for bottom nav */
+@media (max-width: 768px) {
+  body { padding-bottom: 72px; }
+  footer { margin-bottom: 0; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-glow,
+  .animate-blink,
+  .animate-marquee,
+  .animate-fade-in-up { animation: none; }
+  .hero-cta::before { transition: none; }
+  canvas { display: none; }
+}

@@ -6,6 +6,9 @@ export default function SilkCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    // Respect reduced motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -14,6 +17,9 @@ export default function SilkCanvas() {
     let W: number, H: number;
     let t = 0;
     let animId: number;
+    let frameCount = 0;
+    const isMobile = window.innerWidth < 768;
+    const frameSkip = isMobile ? 2 : 1; // 30fps on mobile, 60fps on desktop
 
     function resize() {
       W = canvas!.width = window.innerWidth;
@@ -22,7 +28,7 @@ export default function SilkCanvas() {
     resize();
     window.addEventListener("resize", resize);
 
-    const curves = Array.from({ length: 12 }, (_, i) => ({
+    const curves = Array.from({ length: isMobile ? 8 : 12 }, (_, i) => ({
       x: (i / 12) * 1.2,
       speed: 0.0003 + Math.random() * 0.0004,
       amp: 0.08 + Math.random() * 0.12,
@@ -33,11 +39,23 @@ export default function SilkCanvas() {
     }));
 
     function draw() {
+      frameCount++;
+      if (frameCount % frameSkip !== 0) {
+        animId = requestAnimationFrame(draw);
+        return;
+      }
+
+      // Pause when page is not visible
+      if (document.hidden) {
+        animId = requestAnimationFrame(draw);
+        return;
+      }
+
       ctx!.clearRect(0, 0, W, H);
       t += 1;
       curves.forEach((c) => {
         ctx!.beginPath();
-        const pts = 80;
+        const pts = isMobile ? 50 : 80;
         for (let i = 0; i <= pts; i++) {
           const px = (c.x + t * c.speed * 0.5) % 1.3 - 0.1;
           const py = i / pts;
@@ -65,7 +83,7 @@ export default function SilkCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-[0.12]"
+      className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-[0.10]"
     />
   );
 }

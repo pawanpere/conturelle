@@ -7,6 +7,9 @@ import AnnouncementBar from "@/components/AnnouncementBar";
 import Footer from "@/components/Footer";
 import SilkCanvas from "@/components/SilkCanvas";
 import LaceCorner from "@/components/LaceCorner";
+import MobileBottomNav from "@/components/MobileBottomNav";
+import ExitPopup from "@/components/ExitPopup";
+import ChatTrigger from "@/components/ChatTrigger";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -42,6 +45,9 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
           <LaceCorner />
+          <MobileBottomNav />
+          <ExitPopup />
+          <ChatTrigger />
         </CartProvider>
       </body>
     </html>
