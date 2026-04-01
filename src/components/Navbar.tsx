@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import CartDrawer from "./CartDrawer";
 
@@ -181,7 +182,9 @@ export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
   const { count, setIsOpen } = useCart();
+  const pathname = usePathname();
   const menuTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -209,9 +212,10 @@ export default function Navbar() {
 
   const activeItem = navItems.find((i) => i.label === activeMenu);
 
-  const navText = scrolled ? "text-[var(--text)]" : "text-white";
-  const navTextMuted = scrolled ? "text-[var(--text-muted)]" : "text-white/70";
-  const navTextHover = scrolled ? "hover:text-[var(--text)]" : "hover:text-white";
+  const heroMode = isHome && !scrolled;
+  const navText = heroMode ? "text-white" : "text-[var(--text)]";
+  const navTextMuted = heroMode ? "text-white/70" : "text-[var(--text-muted)]";
+  const navTextHover = heroMode ? "hover:text-white" : "hover:text-[var(--text)]";
 
   return (
     <>
@@ -231,9 +235,9 @@ export default function Navbar() {
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
             >
-              <span className={`block w-full h-[1.5px] ${scrolled ? "bg-[var(--text)]" : "bg-white"} transition-colors`} />
-              <span className={`block w-full h-[1.5px] ${scrolled ? "bg-[var(--text)]" : "bg-white"} transition-colors`} />
-              <span className={`block w-3/4 h-[1.5px] ${scrolled ? "bg-[var(--text)]" : "bg-white"} transition-colors`} />
+              <span className={`block w-full h-[1.5px] ${heroMode ? "bg-white" : "bg-[var(--text)]"} transition-colors`} />
+              <span className={`block w-full h-[1.5px] ${heroMode ? "bg-white" : "bg-[var(--text)]"} transition-colors`} />
+              <span className={`block w-3/4 h-[1.5px] ${heroMode ? "bg-white" : "bg-[var(--text)]"} transition-colors`} />
             </button>
 
             {/* Logo */}

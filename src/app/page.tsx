@@ -19,12 +19,22 @@ export default function Home() {
       <EditorialBreak
         image="/images/805838_813838_535_16175.jpg"
         alt="Swing collection editorial"
+        subtext="New Collection"
+        headline="Swing — Delicate Lace, Bold Confidence"
+        cta="Explore the Collection"
+        ctaHref="/collections/swing"
+        align="right"
       />
       <HeritageSection />
       <BestsellersSection />
       <EditorialBreak
         image="/images/205225_280225_722_22719.jpg"
         alt="Lovely Lotus collection"
+        subtext="Crafted in Europe"
+        headline="Lovely Lotus — Where Comfort Meets Elegance"
+        cta="Shop Lovely Lotus"
+        ctaHref="/collections/lovely-lotus"
+        align="left"
       />
       <ValuePropositions />
       <FitFinderCTA />
