@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+  --rose: #C49AAD;
+  --burgundy: #4a1825;
+  --terracotta: #A52848;
+  --cream: #f5efe8;
+  --dust: #D4B3C2;
+  --gold: #c9a96e;
+  --dark: #150810;
+  --mid: #2B1021;
+  --sale-red: #B5484A;
+  --star-gold: #D4A017;
+  --success: #4A7C59;
+  --oos-gray: #666;
+  --bg: #150810;
+  --bg-subtle: #1E0B18;
+  --bg-card: #2B1021;
+  --border: rgba(201,169,110,0.1);
+  --border-faint: rgba(201,169,110,0.06);
+  --text-muted: rgba(245,239,232,0.5);
+  --text-faint: rgba(245,239,232,0.3);
+}
+
+@theme inline {
+  --color-dark: #150810;
+  --color-mid: #2B1021;
+  --color-cream: #f5efe8;
+  --color-gold: #c9a96e;
+  --color-rose: #C49AAD;
+  --color-burgundy: #4a1825;
+  --color-terracotta: #A52848;
+  --color-dust: #D4B3C2;
+  --color-sale-red: #B5484A;
+  --color-star-gold: #D4A017;
+  --color-success: #4A7C59;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  color: var(--cream);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); }
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-glow { animation: glowPulse 6s ease-in-out infinite; }
+.animate-blink { animation: blink 2s step-end infinite; }
+.animate-marquee { animation: marquee 28s linear infinite; }
+.animate-fade-in-up { animation: fadeInUp 0.8s ease forwards; }
+
+.gold-line {
+  width: 40px; height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+  margin: 16px 0;
+}
+
+/* Hero CTA fill animation */
+.hero-cta {
+  position: relative; overflow: hidden;
+  transition: color 0.4s;
+}
+.hero-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold);
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.77,0,0.18,1);
+}
+.hero-cta:hover { color: var(--dark); }
+.hero-cta:hover::before { transform: translateX(0); }
+
+/* Line link underline */
+.line-link { position: relative; }
+.line-link::after {
+  content: ''; position: absolute;
+  bottom: -3px; left: 0; right: 0; height: 1px;
+  background: var(--gold);
+  transform: scaleX(0.3); transform-origin: left;
+  transition: transform 0.4s;
+}
+.line-link:hover::after { transform: scaleX(1); }
+
+/* Product card gradient backgrounds — burgundy/plum tones */
+.pc1 { background: linear-gradient(145deg, #3d1028, #2a0e20, #1f0a18); }
+.pc2 { background: linear-gradient(145deg, #2a1025, #3b1028, #1e0818); }
+.pc3 { background: linear-gradient(145deg, #1e1028, #2e0e30, #1a0818); }
+.pc4 { background: linear-gradient(145deg, #260e20, #3a1028, #2a0c1e); }
+.pc5 { background: linear-gradient(145deg, #2e1028, #1e0820, #3a102e); }
+.pc6 { background: linear-gradient(145deg, #280e20, #3c1028, #1a0818); }
