@@ -209,6 +209,10 @@ export default function Navbar() {
 
   const activeItem = navItems.find((i) => i.label === activeMenu);
 
+  const navText = scrolled ? "text-[var(--text)]" : "text-white";
+  const navTextMuted = scrolled ? "text-[var(--text-muted)]" : "text-white/70";
+  const navTextHover = scrolled ? "hover:text-[var(--text)]" : "hover:text-white";
+
   return (
     <>
       <header
@@ -227,14 +231,14 @@ export default function Navbar() {
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
             >
-              <span className="block w-full h-[1.5px] bg-[var(--text)]" />
-              <span className="block w-full h-[1.5px] bg-[var(--text)]" />
-              <span className="block w-3/4 h-[1.5px] bg-[var(--text)]" />
+              <span className={`block w-full h-[1.5px] ${scrolled ? "bg-[var(--text)]" : "bg-white"} transition-colors`} />
+              <span className={`block w-full h-[1.5px] ${scrolled ? "bg-[var(--text)]" : "bg-white"} transition-colors`} />
+              <span className={`block w-3/4 h-[1.5px] ${scrolled ? "bg-[var(--text)]" : "bg-white"} transition-colors`} />
             </button>
 
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
-              <span className="font-[family-name:var(--font-cormorant)] text-2xl lg:text-3xl font-light italic tracking-[0.02em] text-[var(--text)]">
+              <span className={`font-[family-name:var(--font-cormorant)] text-2xl lg:text-3xl font-light italic tracking-[0.02em] ${navText} transition-colors`}>
                 Conturelle
               </span>
             </Link>
@@ -250,8 +254,8 @@ export default function Navbar() {
                     href={item.href}
                     className={`text-[13px] tracking-[0.04em] uppercase transition-colors whitespace-nowrap ${
                       activeMenu === item.label
-                        ? "text-[var(--text)]"
-                        : "text-[var(--text-muted)] hover:text-[var(--text)]"
+                        ? navText
+                        : `${navTextMuted} ${navTextHover}`
                     }`}
                   >
                     {item.label}
@@ -263,13 +267,13 @@ export default function Navbar() {
             {/* Right icons */}
             <div className="flex items-center gap-4">
               <Link href="/search" className="hidden lg:block" aria-label="Search">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--text)]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={`${navText} transition-colors`}>
                   <circle cx="11" cy="11" r="8" />
                   <path d="M21 21l-4.35-4.35" />
                 </svg>
               </Link>
               <Link href="/wishlist" className="hidden lg:block" aria-label="Wishlist">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--text)]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={`${navText} transition-colors`}>
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                 </svg>
               </Link>
@@ -278,7 +282,7 @@ export default function Navbar() {
                 className="relative"
                 aria-label="Cart"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--text)]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={`${navText} transition-colors`}>
                   <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <path d="M16 10a4 4 0 01-8 0" />

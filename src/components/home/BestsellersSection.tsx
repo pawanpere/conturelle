@@ -8,7 +8,7 @@ export default function BestsellersSection() {
   const bestsellers = getBestsellers().slice(0, 6);
 
   return (
-    <section className="py-20 px-6 md:px-12 max-w-[1400px] mx-auto">
+    <section className="py-14 md:py-16 px-6 md:px-12 max-w-[1400px] mx-auto">
       <div className="flex items-end justify-between mb-12">
         <h2 className="font-[family-name:var(--font-cormorant)] text-[36px] md:text-[48px] font-light text-[var(--text)]">
           Bestsellers

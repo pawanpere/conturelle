@@ -14,11 +14,12 @@ export default function HeroSection() {
       <img
         src="/images/80505_81305_004_21342.jpg"
         alt="Conturelle lingerie campaign"
-        className="absolute inset-0 w-full h-full object-cover object-center"
+        className="absolute inset-0 w-full h-full object-cover object-[center_60%]"
         loading="eager"
       />
 
-      {/* Very subtle gradient overlay at bottom for text legibility */}
+      {/* Gradient overlays for text legibility — top for navbar, bottom for CTAs */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
 
       {/* Content — bottom-left aligned like Skims */}

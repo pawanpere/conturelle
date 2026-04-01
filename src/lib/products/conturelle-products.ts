@@ -23,14 +23,11 @@ export const conturelleProducts: Product[] = [
       { name: "Porcelain Rose", hex: "#E8C4C8", code: "528" },
     ],
     euSizes: [
-      "75B","80B","85B","90B","95B","100B",
-      "75C","80C","85C","90C","95C","100C",
-      "70D","75D","80D","85D","90D","95D","100D",
-      "70E","75E","80E","85E","90E","95E","100E",
-      "70F","75F","80F","85F","90F","95F",
-      "70G","75G","80G","85G","90G","95G",
-      "70H","75H","80H","85H","90H",
-      "70I","75I","80I","85I","90I",
+      "75B","80B","85B","90B","95B",
+      "75C","80C","85C","90C","95C",
+      "75D","80D","85D","90D","95D",
+      "75E","80E","85E","90E","95E",
+      "75F","80F","85F","90F","95F",
     ],
     materialComposition: "66% PA, 24% PES, 10% EL",
     description:
@@ -70,7 +67,7 @@ export const conturelleProducts: Product[] = [
       { name: "Porcelain Rose", hex: "#E8C4C8", code: "528" },
       { name: "Tango Red", hex: "#C62D42", code: "546" },
     ],
-    euSizes: ["38", "40", "42", "44", "46", "48"],
+    euSizes: ["38", "40", "42", "44", "46"],
     materialComposition: "72% PA, 17% EL, 6% CO, 5% PES",
     description:
       "The matching brief to the Provence wired bra. Stunning embroidery in a perfect fit that flatters every figure.",
@@ -107,7 +104,7 @@ export const conturelleProducts: Product[] = [
       { name: "Black", hex: "#1a1a1a", code: "004" },
       { name: "Sand", hex: "#D2B48C", code: "034" },
     ],
-    euSizes: ["34","36","38","40","42","44","46","48","50"],
+    euSizes: ["38","40","42","44","46"],
     materialComposition: "69% PA, 31% EL",
     description:
       "Soft Touch stands for highly effective shaping properties. The range contours an even and firm body shape while it offers at the same time a very pleasant comfort of wear.",
@@ -141,7 +138,7 @@ export const conturelleProducts: Product[] = [
       { name: "Black", hex: "#1a1a1a", code: "004" },
       { name: "Sand", hex: "#D2B48C", code: "034" },
     ],
-    euSizes: ["36","38","40","42","44","46","48"],
+    euSizes: ["38","40","42","44","46"],
     materialComposition: "58% PA, 42% EL",
     description:
       "The Soft Touch long panty provides shaping support through the thigh area. The high elastane content ensures firm but comfortable body contouring.",
@@ -175,7 +172,7 @@ export const conturelleProducts: Product[] = [
       { name: "Black", hex: "#1a1a1a", code: "004" },
       { name: "Sand", hex: "#D2B48C", code: "034" },
     ],
-    euSizes: ["36","38","40","42","44","46","48"],
+    euSizes: ["38","40","42","44","46"],
     materialComposition: "63% PA, 37% EL",
     description:
       "Full-length shaping pants from the Soft Touch collection. Maximum coverage and contouring with exceptional comfort.",
@@ -209,7 +206,7 @@ export const conturelleProducts: Product[] = [
       { name: "Black", hex: "#1a1a1a", code: "004" },
       { name: "Sand", hex: "#D2B48C", code: "034" },
     ],
-    euSizes: ["36","38","40","42","44","46","48"],
+    euSizes: ["38","40","42","44","46"],
     materialComposition: "61% PA, 39% EL",
     description:
       "The Soft Touch brief provides gentle but effective shaping in a classic brief silhouette. 39% elastane ensures a smooth, flattering fit.",
@@ -247,12 +244,11 @@ export const conturelleProducts: Product[] = [
       { name: "Sand", hex: "#D2B48C", code: "034" },
     ],
     euSizes: [
-      "70B","75B","80B","85B","90B","95B","100B",
-      "70C","75C","80C","85C","90C","95C","100C",
-      "70D","75D","80D","85D","90D","95D","100D",
-      "70E","75E","80E","85E","90E","95E","100E",
-      "70F","75F","80F","85F","90F","95F",
-      "70G","75G","80G","85G",
+      "75B","80B","85B","90B","95B",
+      "75C","80C","85C","90C","95C",
+      "75D","80D","85D","90D","95D",
+      "75E","80E","85E","90E","95E",
+      "75F","80F","85F","90F","95F",
     ],
     materialComposition: "52% PES, 33% PA, 15% EL",
     description:
@@ -288,7 +284,7 @@ export const conturelleProducts: Product[] = [
       { name: "Black", hex: "#1a1a1a", code: "004" },
       { name: "Sand", hex: "#D2B48C", code: "034" },
     ],
-    euSizes: ["38","40","42","44","46","48"],
+    euSizes: ["38","40","42","44","46"],
     materialComposition: "76% PA, 20% EL, 4% CO",
     description:
       "The Pure Feeling highwaist panty provides smooth, comfortable coverage. A perfect match to the Pure Feeling spacer bra.",
@@ -326,12 +322,10 @@ export const conturelleProducts: Product[] = [
     ],
     euSizes: [
       "75B","80B","85B","90B","95B",
-      "75C","80C","85C","90C","95C","100C",
-      "75D","80D","85D","90D","95D","100D",
+      "75C","80C","85C","90C","95C",
+      "75D","80D","85D","90D","95D",
       "75E","80E","85E","90E","95E",
       "75F","80F","85F","90F","95F",
-      "75G","80G","85G","90G","95G",
-      "75H","80H","85H","90H",
     ],
     materialComposition: "45% PA, 28% PES, 27% EL",
     description:
@@ -366,13 +360,11 @@ export const conturelleProducts: Product[] = [
       { name: "Dusty Rose", hex: "#DCAE96", code: "535" },
     ],
     euSizes: [
-      "70B","75B","80B","85B","90B","95B","100B",
-      "70C","75C","80C","85C","90C","95C","100C",
-      "70D","75D","80D","85D","90D","95D","100D",
-      "70E","75E","80E","85E","90E","95E","100E",
-      "70F","75F","80F","85F","90F","95F",
-      "70G","75G","80G","85G","90G",
-      "70H","75H","80H","85H","90H",
+      "75B","80B","85B","90B","95B",
+      "75C","80C","85C","90C","95C",
+      "75D","80D","85D","90D","95D",
+      "75E","80E","85E","90E","95E",
+      "75F","80F","85F","90F","95F",
     ],
     materialComposition: "55% PA, 23% EL, 22% PES",
     description:
@@ -406,7 +398,7 @@ export const conturelleProducts: Product[] = [
     colors: [
       { name: "Dusty Rose", hex: "#DCAE96", code: "535" },
     ],
-    euSizes: ["38","40","42","44","46","48","50"],
+    euSizes: ["38","40","42","44","46"],
     materialComposition: "60% PES, 17% PA, 16% EL, 7% CO",
     description:
       "The Swing brief completes the collection with matching fine lace. Comfortable everyday wear with elegant style.",
@@ -444,11 +436,10 @@ export const conturelleProducts: Product[] = [
     ],
     euSizes: [
       "75B","80B","85B","90B","95B",
-      "75C","80C","85C","90C","95C","100C",
-      "75D","80D","85D","90D","95D","100D",
-      "75E","80E","85E","90E","95E","100E",
-      "70F","75F","80F","85F","90F",
-      "70G","75G","80G","85G",
+      "75C","80C","85C","90C","95C",
+      "75D","80D","85D","90D","95D",
+      "75E","80E","85E","90E","95E",
+      "75F","80F","85F","90F","95F",
     ],
     materialComposition: "61% PES, 22% PA, 17% EL",
     description:
@@ -483,7 +474,7 @@ export const conturelleProducts: Product[] = [
       { name: "Purple Lotion", hex: "#B784A7", code: "705" },
       { name: "Cream", hex: "#FFFDD0", code: "710" },
     ],
-    euSizes: ["38","40","42","44","46","48","50"],
+    euSizes: ["38","40","42","44","46"],
     materialComposition: "69% PA, 20% EL, 8% CO, 3% PES",
     description:
       "The Mille Fleurs brief features the same delicate filigree embroidery in soft, romantic colors.",

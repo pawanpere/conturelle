@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HeritageSection() {
   return (
-    <section className="py-20 md:py-28 px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-[1200px] mx-auto">
+    <section className="py-14 md:py-20 px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-[1200px] mx-auto">
       <div className="relative aspect-[3/4] overflow-hidden">
         <img
           src="/images/80505_81005_528_3354-1024x768.jpg"

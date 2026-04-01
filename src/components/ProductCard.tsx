@@ -81,8 +81,8 @@ export default function ProductCard({ product }: { product: Product }) {
             <div
               className={`absolute top-3 left-3 text-[9px] tracking-[0.06em] uppercase px-2.5 py-1 z-[3] rounded-full ${
                 product.badge === "bestseller"
-                  ? "bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30"
-                  : "bg-[var(--rose)]/15 text-[var(--rose)] border border-[var(--rose)]/30"
+                  ? "bg-[var(--accent)] text-white"
+                  : "bg-[var(--rose)] text-white"
               }`}
             >
               {product.badge}

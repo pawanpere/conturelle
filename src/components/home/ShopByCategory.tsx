@@ -31,6 +31,12 @@ const categories = [
     image: "/images/5076_004_023_1200x800px-1024x683.jpg",
     href: "/shop?style=corsetry",
   },
+  {
+    name: "New In",
+    description: "Latest arrivals",
+    image: "/images/803837_814837_732_2526_1200x800px-1024x683.jpg",
+    href: "/shop?sort=newest",
+  },
 ];
 
 export default function ShopByCategory() {
@@ -47,7 +53,7 @@ export default function ShopByCategory() {
           View All &rarr;
         </Link>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         {categories.map((cat) => (
           <Link
             key={cat.name}
