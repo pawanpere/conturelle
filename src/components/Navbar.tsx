@@ -31,7 +31,7 @@ export default function Navbar() {
             { href: "/#collection", label: "Shop" },
             { href: "/#categories", label: "Categories" },
             { href: "/#heritage", label: "Story" },
-            { href: "/#fit-finder", label: "Fit Finder" },
+            { href: "/fit-quiz", label: "Fit Finder" },
           ].map((link) => (
             <li key={link.href}>
               <Link
@@ -80,7 +80,7 @@ export default function Navbar() {
             { href: "/#collection", label: "Shop" },
             { href: "/#categories", label: "Categories" },
             { href: "/#heritage", label: "Story" },
-            { href: "/#fit-finder", label: "Fit Finder" },
+            { href: "/fit-quiz", label: "Fit Finder" },
           ].map((link) => (
             <Link
               key={link.href}

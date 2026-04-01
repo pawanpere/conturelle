@@ -264,7 +264,7 @@ export default function CheckoutPage() {
           <p className="text-[11px] text-[rgba(245,239,232,0.5)]">
             Haven&rsquo;t taken our Fit Quiz yet? Get personalized size recommendations for your next order.
           </p>
-          <a href="#" className="mt-3 inline-block text-[9px] tracking-[0.25em] uppercase text-[var(--gold)] no-underline border-b border-[var(--gold)] pb-0.5 hover:text-[var(--cream)] hover:border-[var(--cream)] transition-colors">
+          <a href="/fit-quiz" className="mt-3 inline-block text-[9px] tracking-[0.25em] uppercase text-[var(--gold)] no-underline border-b border-[var(--gold)] pb-0.5 hover:text-[var(--cream)] hover:border-[var(--cream)] transition-colors">
             Take the Fit Quiz &rarr;
           </a>
         </div>

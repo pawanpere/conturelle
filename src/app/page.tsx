@@ -51,7 +51,7 @@ export default function Home() {
             <a href="#collection" className="hero-cta inline-block py-3.5 px-10 border border-[rgba(245,239,232,0.4)] text-[10px] tracking-[0.15em] uppercase text-[var(--cream)] no-underline">
               <span className="relative z-[1]">Shop the Collection</span>
             </a>
-            <a href="#fit-finder" className="text-[11px] tracking-[0.1em] uppercase text-[rgba(245,239,232,0.45)] no-underline border-b border-[rgba(245,239,232,0.3)] pb-[3px] hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
+            <a href="/fit-quiz" className="text-[11px] tracking-[0.1em] uppercase text-[rgba(245,239,232,0.45)] no-underline border-b border-[rgba(245,239,232,0.3)] pb-[3px] hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
               Find Your Fit &rarr;
             </a>
           </div>
@@ -162,10 +162,10 @@ export default function Home() {
             Answer 4 quick questions and we&rsquo;ll match you to your ideal size and style. Sizes EU 70&ndash;100, cups B&ndash;G.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center items-center">
-            <a href="#" className="inline-block py-4 px-12 bg-[var(--burgundy)] border border-[var(--burgundy)] text-[10px] tracking-[0.15em] uppercase text-[var(--cream)] no-underline hover:bg-transparent hover:border-[var(--rose)] hover:text-[var(--rose)] transition-all">
+            <a href="/fit-quiz" className="inline-block py-4 px-12 bg-[var(--burgundy)] border border-[var(--burgundy)] text-[10px] tracking-[0.15em] uppercase text-[var(--cream)] no-underline hover:bg-transparent hover:border-[var(--rose)] hover:text-[var(--rose)] transition-all">
               Start the Fit Quiz
             </a>
-            <a href="#" className="text-[10px] tracking-[0.1em] uppercase text-[rgba(245,239,232,0.45)] no-underline border-b border-[rgba(245,239,232,0.2)] pb-[3px] hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
+            <a href="/fit-quiz" className="text-[10px] tracking-[0.1em] uppercase text-[rgba(245,239,232,0.45)] no-underline border-b border-[rgba(245,239,232,0.2)] pb-[3px] hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
               View Size Guide
             </a>
           </div>

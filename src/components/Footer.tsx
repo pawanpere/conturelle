@@ -52,10 +52,17 @@ export default function Footer() {
         <div>
           <p className="text-[10px] tracking-[0.15em] uppercase text-[var(--gold)] mb-6">Help</p>
           <ul className="list-none flex flex-col gap-3.5">
-            {["Size Guide", "Fit Finder Quiz", "Shipping", "Returns", "Contact Us", "FAQs"].map((item) => (
-              <li key={item}>
-                <a href="#" className="text-[12px] text-[rgba(245,239,232,0.4)] no-underline hover:text-[var(--cream)] transition-colors">
-                  {item}
+            {[
+              { label: "Size Guide", href: "#" },
+              { label: "Fit Finder Quiz", href: "/fit-quiz" },
+              { label: "Shipping", href: "#" },
+              { label: "Returns", href: "#" },
+              { label: "Contact Us", href: "#" },
+              { label: "FAQs", href: "#" },
+            ].map((item) => (
+              <li key={item.label}>
+                <a href={item.href} className="text-[12px] text-[rgba(245,239,232,0.4)] no-underline hover:text-[var(--cream)] transition-colors">
+                  {item.label}
                 </a>
               </li>
             ))}

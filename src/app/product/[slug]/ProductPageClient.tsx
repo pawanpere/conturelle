@@ -274,7 +274,7 @@ export default function ProductPageClient({
               </div>
 
               {/* Fit quiz link */}
-              <a href="/#fit-finder" className="flex items-center gap-2 mt-3 text-[9px] tracking-[0.15em] text-[var(--gold)] no-underline hover:text-[var(--cream)] transition-colors">
+              <a href="/fit-quiz" className="flex items-center gap-2 mt-3 text-[9px] tracking-[0.15em] text-[var(--gold)] no-underline hover:text-[var(--cream)] transition-colors">
                 <span className="text-sm">&#9432;</span>
                 Find Your Size &mdash; Take the 60-Second Fit Quiz
               </a>
@@ -670,7 +670,7 @@ export default function ProductPageClient({
             <p className="mt-6 text-[11px] text-[rgba(245,239,232,0.5)] leading-relaxed">
               <strong className="text-[var(--cream)]">How to measure:</strong> Wrap a measuring tape snugly around your ribcage, just under your bust. Round to the nearest cm.
             </p>
-            <a href="/#fit-finder" className="line-link mt-4 inline-block text-[9px] tracking-[0.3em] uppercase text-[var(--gold)] no-underline">
+            <a href="/fit-quiz" className="line-link mt-4 inline-block text-[9px] tracking-[0.3em] uppercase text-[var(--gold)] no-underline">
               Take the Fit Quiz &rarr;
             </a>
           </div>
