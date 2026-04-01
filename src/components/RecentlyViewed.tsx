@@ -24,8 +24,8 @@ export default function RecentlyViewed({ currentSlug }: { currentSlug?: string }
 
   return (
     <section className="px-6 md:px-12 max-w-[1400px] mx-auto mb-16">
-      <h2 className="font-[family-name:var(--font-cormorant)] text-[24px] font-light text-[var(--cream)] mb-6">
-        Recently <em className="italic text-[var(--terracotta)]">Viewed</em>
+      <h2 className="font-[family-name:var(--font-cormorant)] text-[24px] font-light text-[var(--text)] mb-6">
+        Recently <em className="italic text-[var(--accent)]">Viewed</em>
       </h2>
       <div className="flex gap-3 overflow-x-auto pb-4" style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}>
         {viewedProducts.map((p) => (
@@ -35,11 +35,11 @@ export default function RecentlyViewed({ currentSlug }: { currentSlug?: string }
             className="flex-shrink-0 w-[140px] no-underline group"
             style={{ scrollSnapAlign: "start" }}
           >
-            <div className="aspect-[3/4] overflow-hidden bg-[var(--mid)] rounded-sm mb-2">
+            <div className="aspect-[3/4] overflow-hidden bg-[var(--bg-card)] mb-2">
               <img src={p.images[0]} alt={p.name} className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" loading="lazy" />
             </div>
-            <p className="text-[11px] text-[var(--cream)] truncate">{p.name}</p>
-            <p className="font-[family-name:var(--font-cormorant)] text-sm text-[var(--gold)]">&euro;{p.price}</p>
+            <p className="text-[11px] text-[var(--text)] truncate">{p.name}</p>
+            <p className="font-[family-name:var(--font-cormorant)] text-sm text-[var(--text)]">${p.price}</p>
           </Link>
         ))}
       </div>

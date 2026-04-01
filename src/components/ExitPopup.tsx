@@ -8,13 +8,11 @@ export default function ExitPopup() {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    // Don't show if already dismissed OR submitted
     if (sessionStorage.getItem("conturelle_popup_dismissed")) return;
     if (sessionStorage.getItem("conturelle_email_captured")) return;
 
     let triggered = false;
 
-    // Desktop only: exit intent (mouse leaves viewport top)
     const handleMouseLeave = (e: MouseEvent) => {
       if (triggered) return;
       if (e.clientY <= 0) {
@@ -23,13 +21,12 @@ export default function ExitPopup() {
       }
     };
 
-    // Long timeout fallback (90s) — gentle, not aggressive
     const timeout = setTimeout(() => {
       if (!triggered) {
         triggered = true;
         setVisible(true);
       }
-    }, 90000);
+    }, 30000);
 
     document.addEventListener("mouseleave", handleMouseLeave);
 
@@ -58,68 +55,78 @@ export default function ExitPopup() {
 
   return (
     <>
-      <div className="fixed inset-0 bg-black/60 z-[500]" onClick={dismiss} />
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[501] bg-[var(--dark)] border border-[rgba(201,169,110,0.2)] w-[90%] max-w-[380px] overflow-hidden shadow-2xl">
+      <div className="fixed inset-0 bg-black/40 z-[500]" onClick={dismiss} />
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[501] bg-[var(--bg)] max-w-[720px] w-[92%] overflow-hidden shadow-2xl">
         <button
           onClick={dismiss}
-          className="absolute top-3 right-3 z-10 bg-transparent border-none text-[rgba(245,239,232,0.4)] text-xl cursor-pointer hover:text-[var(--cream)]"
+          className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text)] transition-colors bg-transparent border-none cursor-pointer"
           aria-label="Close"
         >
-          &times;
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
         </button>
 
-        <div className="w-full h-36 overflow-hidden relative">
-          <img
-            src="https://conturelle.com/wp-content/uploads/2021/08/80505_81305_004_21342-1024x768.jpg"
-            alt="Conturelle"
-            className="w-full h-full object-cover object-top"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--dark)]" />
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="hidden md:block aspect-[3/4] overflow-hidden">
+            <img
+              src="/images/205225_280225_722_22719.jpg"
+              alt="Conturelle lingerie"
+              className="w-full h-full object-cover"
+            />
+          </div>
 
-        <div className="px-6 pb-6 text-center -mt-4 relative">
-          {!submitted ? (
-            <>
-              <h3 className="font-[family-name:var(--font-cormorant)] text-[26px] font-light text-[var(--cream)] leading-tight">
-                Before You Go
-              </h3>
-              <p className="mt-3 text-[11px] text-[rgba(245,239,232,0.5)] leading-relaxed">
-                Get 10% off your first order.
-              </p>
-              <form onSubmit={handleSubmit} className="mt-5 flex flex-col gap-3">
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="w-full py-3.5 px-4 bg-[rgba(21,8,16,0.6)] border border-[rgba(201,169,110,0.15)] text-[var(--cream)] text-xs tracking-[0.03em] outline-none placeholder:text-[rgba(245,239,232,0.3)] focus:border-[var(--gold)] text-center"
-                />
+          <div className="flex flex-col justify-center px-8 py-10 md:px-10">
+            {!submitted ? (
+              <>
+                <p className="text-[10px] tracking-[0.06em] uppercase text-[var(--accent)] mb-3">
+                  Before you go
+                </p>
+                <h2 className="font-[family-name:var(--font-cormorant)] text-[32px] font-light text-[var(--text)] leading-tight">
+                  10% Off Your First Order
+                </h2>
+                <p className="text-[12px] text-[var(--text-muted)] mt-3 leading-relaxed">
+                  Join the Conturelle world. Get early access to new collections, styling tips, and an exclusive welcome discount.
+                </p>
+                <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    required
+                    className="w-full py-3.5 px-4 bg-[var(--bg-card)] border border-[var(--border)] text-[var(--text)] text-xs outline-none placeholder:text-[var(--text-faint)] focus:border-[var(--accent)]"
+                  />
+                  <button
+                    type="submit"
+                    className="w-full py-3.5 bg-[var(--text)] text-[10px] tracking-[0.08em] uppercase text-[var(--bg)] cursor-pointer hover:opacity-90 transition-opacity"
+                  >
+                    Get My 10% Off
+                  </button>
+                </form>
                 <button
-                  type="submit"
-                  className="w-full py-3.5 bg-[var(--gold)] text-[var(--dark)] text-[10px] tracking-[0.15em] uppercase font-medium border-none cursor-pointer hover:bg-[var(--cream)] transition-all"
+                  onClick={dismiss}
+                  className="mt-4 text-[10px] text-[var(--text-faint)] bg-transparent border-none cursor-pointer hover:text-[var(--text-muted)] transition-colors"
                 >
-                  Get 10% Off
+                  No thanks
                 </button>
-              </form>
-              <button
-                onClick={dismiss}
-                className="mt-4 text-[10px] text-[rgba(245,239,232,0.3)] bg-transparent border-none cursor-pointer hover:text-[rgba(245,239,232,0.5)]"
-              >
-                No thanks
-              </button>
-            </>
-          ) : (
-            <div className="py-6">
-              <span className="text-[var(--success)] text-3xl">&#10003;</span>
-              <h3 className="font-[family-name:var(--font-cormorant)] text-2xl text-[var(--cream)] mt-3">
-                Welcome!
-              </h3>
-              <p className="text-[11px] text-[rgba(245,239,232,0.5)] mt-2">
-                Check your inbox for your discount code.
-              </p>
-            </div>
-          )}
+                <p className="text-[10px] text-[var(--text-faint)] mt-3">
+                  No spam. Unsubscribe anytime.
+                </p>
+              </>
+            ) : (
+              <div className="text-center py-6">
+                <span className="text-[var(--success)] text-3xl">&#10003;</span>
+                <h3 className="font-[family-name:var(--font-cormorant)] text-2xl text-[var(--text)] mt-3">
+                  Welcome!
+                </h3>
+                <p className="text-[11px] text-[var(--text-muted)] mt-2">
+                  Check your inbox for your discount code.
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

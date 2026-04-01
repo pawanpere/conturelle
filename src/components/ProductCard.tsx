@@ -3,23 +3,28 @@
 import Link from "next/link";
 import { Product } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 import { useState } from "react";
 
 export default function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart();
+  const wishlist = useWishlist();
   const [quickAdd, setQuickAdd] = useState(false);
-  const [selectedBand, setSelectedBand] = useState<number | null>(null);
-  const [selectedCup, setSelectedCup] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [selectedColorIdx, setSelectedColorIdx] = useState(0);
+
+  const isBra = product.productType.includes("bra");
 
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (product.bandSizes.length === 0) {
+    if (product.euSizes.length <= 1) {
       addItem({
         slug: product.slug,
         name: product.name,
         price: product.price,
-        color: product.colors[0].name,
+        color: product.colors[selectedColorIdx].name,
+        size: product.euSizes[0] || "One Size",
         quantity: 1,
         image: product.images[0],
       });
@@ -31,112 +36,103 @@ export default function ProductCard({ product }: { product: Product }) {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (selectedBand && selectedCup) {
+    if (selectedSize) {
       addItem({
         slug: product.slug,
         name: product.name,
         price: product.price,
-        color: product.colors[0].name,
-        bandSize: selectedBand,
-        cupSize: selectedCup,
+        color: product.colors[selectedColorIdx].name,
+        size: selectedSize,
         quantity: 1,
         image: product.images[0],
       });
       setQuickAdd(false);
-      setSelectedBand(null);
-      setSelectedCup(null);
+      setSelectedSize(null);
     }
   };
 
-  // Size range string
-  const sizeRange = product.bandSizes.length > 0 && product.cupSizes.length > 0
-    ? `${product.bandSizes[0]}${product.cupSizes[0]}–${product.bandSizes[product.bandSizes.length - 1]}${product.cupSizes[product.cupSizes.length - 1]}`
-    : null;
+  const handleWishlistToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    wishlist.toggle(product.slug);
+  };
+
+  const isWishlisted = wishlist.has(product.slug);
 
   return (
-    <div className="group relative overflow-hidden bg-[var(--mid)] rounded-sm">
+    <div className="group relative overflow-hidden bg-[var(--bg-card)]">
       <Link href={`/product/${product.slug}`} className="no-underline">
         {/* Image area */}
         <div className="relative aspect-[3/4] overflow-hidden cursor-pointer">
-          <div className={`w-full h-full ${product.pcClass} transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.04] flex items-center justify-center`}>
-            <img
-              src={product.images[0]}
-              alt={product.name}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(21,8,16,0.7)] opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+          <img
+            src={product.images[0]}
+            alt={product.name}
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
+            loading="lazy"
+          />
+          <img
+            src={product.secondaryImage || product.images[1] || product.images[0]}
+            alt={`${product.name} alternate view`}
+            className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            loading="lazy"
+          />
 
           {product.badge && (
             <div
-              className={`absolute top-3 left-3 text-[9px] tracking-[0.1em] uppercase px-2 py-0.5 z-[3] ${
+              className={`absolute top-3 left-3 text-[9px] tracking-[0.06em] uppercase px-2.5 py-1 z-[3] rounded-full ${
                 product.badge === "bestseller"
-                  ? "bg-[rgba(201,169,110,0.15)] text-[var(--gold)] border border-[rgba(201,169,110,0.3)]"
-                  : product.badge === "new"
-                  ? "bg-[var(--burgundy)] text-[var(--cream)]"
-                  : "bg-[var(--sale-red)] text-[var(--cream)]"
+                  ? "bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30"
+                  : "bg-[var(--rose)]/15 text-[var(--rose)] border border-[var(--rose)]/30"
               }`}
             >
               {product.badge}
             </div>
           )}
 
+          {/* Wishlist heart */}
+          <button
+            onClick={handleWishlistToggle}
+            className="absolute top-3 right-3 z-[3] w-8 h-8 flex items-center justify-center rounded-full bg-[var(--bg)]/80 backdrop-blur-sm transition-all hover:bg-[var(--bg)]"
+            aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill={isWishlisted ? "var(--rose)" : "none"} stroke={isWishlisted ? "var(--rose)" : "var(--text-muted)"} strokeWidth="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+          </button>
+
           <button
             onClick={handleQuickAdd}
-            className="absolute bottom-5 left-1/2 -translate-x-1/2 translate-y-3 text-[9px] tracking-[0.12em] uppercase text-[var(--cream)] whitespace-nowrap opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 border-b border-[rgba(245,239,232,0.5)] pb-1 bg-transparent cursor-pointer"
+            className="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-2 text-[10px] tracking-[0.06em] uppercase text-[var(--bg)] bg-[var(--text)] whitespace-nowrap opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 py-2.5 px-6 cursor-pointer"
           >
-            {product.bandSizes.length > 0 ? "Select Size" : "Add to Cart"}
+            {product.euSizes.length > 1 ? "Select Size" : "Add to Cart"}
           </button>
         </div>
 
         {/* Quick-add size panel */}
         {quickAdd && (
           <div
-            className="bg-[rgba(43,16,33,0.8)] p-3 px-4 border-t border-[rgba(201,169,110,0.1)]"
+            className="bg-[var(--bg-subtle)] p-3 px-4 border-t border-[var(--border)]"
             onClick={(e) => e.preventDefault()}
           >
-            {product.bandSizes.length > 0 && (
-              <div className="flex items-center gap-1 mb-2">
-                <span className="text-[9px] tracking-[0.1em] uppercase text-[rgba(245,239,232,0.4)] w-9">Band:</span>
-                {product.bandSizes.map((s) => (
-                  <button
-                    key={s}
-                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setSelectedBand(s); }}
-                    className={`w-8 h-8 text-[10px] cursor-pointer border transition-all ${
-                      selectedBand === s
-                        ? "bg-[var(--burgundy)] text-[var(--cream)] border-[var(--burgundy)]"
-                        : "bg-transparent text-[var(--cream)] border-[rgba(201,169,110,0.2)] hover:border-[var(--gold)]"
-                    }`}
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-            )}
-            {product.cupSizes.length > 0 && (
-              <div className="flex items-center gap-1 mb-2">
-                <span className="text-[9px] tracking-[0.1em] uppercase text-[rgba(245,239,232,0.4)] w-9">Cup:</span>
-                {product.cupSizes.map((s) => (
-                  <button
-                    key={s}
-                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setSelectedCup(s); }}
-                    className={`w-8 h-8 text-[10px] cursor-pointer border transition-all ${
-                      selectedCup === s
-                        ? "bg-[var(--burgundy)] text-[var(--cream)] border-[var(--burgundy)]"
-                        : "bg-transparent text-[var(--cream)] border-[rgba(201,169,110,0.2)] hover:border-[var(--gold)]"
-                    }`}
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-            )}
+            <div className="flex flex-wrap items-center gap-1 mb-2">
+              {product.euSizes.slice(0, isBra ? 12 : 8).map((s) => (
+                <button
+                  key={s}
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setSelectedSize(s); }}
+                  className={`min-w-[36px] h-8 px-1.5 text-[10px] cursor-pointer border transition-all ${
+                    selectedSize === s
+                      ? "bg-[var(--text)] text-[var(--bg)] border-[var(--text)]"
+                      : "bg-transparent text-[var(--text)] border-[var(--border)] hover:border-[var(--text)]"
+                  }`}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
             <button
               onClick={handleAddToCart}
-              disabled={product.bandSizes.length > 0 && (!selectedBand || !selectedCup)}
-              className="w-full py-2.5 bg-[var(--burgundy)] border border-[var(--burgundy)] text-[var(--cream)] text-[9px] tracking-[0.12em] uppercase cursor-pointer transition-all hover:bg-transparent hover:border-[var(--rose)] hover:text-[var(--rose)] disabled:opacity-40 disabled:cursor-not-allowed"
+              disabled={!selectedSize}
+              className="w-full py-2.5 bg-[var(--text)] text-[var(--bg)] text-[10px] tracking-[0.06em] uppercase cursor-pointer transition-all hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed"
             >
               Add to Cart
             </button>
@@ -144,47 +140,46 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
 
         {/* Product info */}
-        <div className="py-4 px-3 flex justify-between items-end">
-          <div>
-            <div className="font-[family-name:var(--font-cormorant)] text-lg font-light text-[var(--cream)] leading-tight">
+        <div className="py-4 px-3 flex justify-between items-start">
+          <div className="flex-1 min-w-0">
+            <div className="font-[family-name:var(--font-cormorant)] text-lg font-light text-[var(--text)] leading-tight">
               {product.name}
             </div>
-            <div className="text-[10px] text-[rgba(245,239,232,0.3)] mt-0.5">
+            <div className="text-[10px] text-[var(--text-faint)] mt-0.5 truncate">
               {product.subtitle}
             </div>
             <div className="flex items-center gap-1.5 mt-1.5">
-              <span className="text-[var(--star-gold)] text-[10px]">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-              <span className="text-[10px] text-[rgba(245,239,232,0.3)]">({product.reviewCount})</span>
+              <span className="text-[var(--accent)] text-[10px]">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span className="text-[10px] text-[var(--text-faint)]">({product.reviewCount})</span>
             </div>
-            {/* Color swatches — larger, with tooltips */}
+            {/* Color swatches */}
             <div className="flex gap-2 mt-2">
-              {product.colors.map((c) => (
-                <span
+              {product.colors.map((c, i) => (
+                <button
                   key={c.name}
-                  className="w-5 h-5 rounded-full border-2 border-[rgba(201,169,110,0.15)] hover:border-[var(--gold)] transition-colors cursor-pointer"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setSelectedColorIdx(i); }}
+                  className={`w-6 h-6 rounded-full border-2 transition-all cursor-pointer ${
+                    selectedColorIdx === i
+                      ? "border-[var(--text)] ring-1 ring-[var(--text)] ring-offset-1 ring-offset-[var(--bg-card)]"
+                      : "border-[var(--border)] hover:border-[var(--text-muted)]"
+                  }`}
                   style={{ background: c.hex }}
                   title={c.name}
                 />
               ))}
             </div>
-            {/* Size availability */}
-            {sizeRange && (
-              <p className="text-[10px] text-[rgba(245,239,232,0.3)] mt-1.5">
-                Sizes {sizeRange}
-              </p>
-            )}
           </div>
-          <div className="text-right">
+          <div className="text-right flex-shrink-0 ml-3">
             {product.originalPrice && (
-              <div className="text-[13px] text-[rgba(245,239,232,0.3)] line-through">
-                &euro;{product.originalPrice}
+              <div className="text-[13px] text-[var(--text-faint)] line-through">
+                ${product.originalPrice}
               </div>
             )}
-            <div className={`font-[family-name:var(--font-cormorant)] text-lg font-light ${product.originalPrice ? "text-[var(--sale-red)]" : "text-[var(--gold)]"}`}>
-              &euro;{product.price}
+            <div className={`font-[family-name:var(--font-cormorant)] text-lg font-light ${product.originalPrice ? "text-[var(--sale-red)]" : "text-[var(--text)]"}`}>
+              ${product.price}
             </div>
             {product.originalPrice && (
-              <span className="text-[8px] bg-[var(--sale-red)] text-[var(--cream)] px-1.5 py-0.5">
+              <span className="text-[8px] bg-[var(--sale-red)] text-white px-1.5 py-0.5 rounded-sm">
                 -{Math.round((1 - product.price / product.originalPrice) * 100)}%
               </span>
             )}

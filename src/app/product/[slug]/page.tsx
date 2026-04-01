@@ -6,12 +6,24 @@ export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = getProduct(slug);
+  if (!product) return { title: "Product Not Found" };
+  return {
+    title: `${product.name} — Conturelle by Felina`,
+    description: product.description,
+  };
+}
+
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = getProduct(slug);
   if (!product) notFound();
 
-  const relatedProducts = products.filter((p) => p.slug !== slug).slice(0, 3);
+  const relatedProducts = products
+    .filter((p) => p.slug !== slug && (p.collection === product.collection || p.styleCategory === product.styleCategory))
+    .slice(0, 3);
 
   return <ProductPageClient product={product} relatedProducts={relatedProducts} />;
 }
