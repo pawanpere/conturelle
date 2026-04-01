@@ -108,11 +108,7 @@ body {
 .pc5 { background: linear-gradient(145deg, #2e1028, #1e0820, #3a102e); }
 .pc6 { background: linear-gradient(145deg, #280e20, #3c1028, #1a0818); }
 
-/* Chat trigger pulse */
-@keyframes chatPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(201,169,110,0.2); }
-  50% { box-shadow: 0 0 0 8px rgba(201,169,110,0); }
-}
+/* Removed chatPulse — chat trigger is now minimal */
 
 /* Mobile bottom padding to account for bottom nav */
 @media (max-width: 768px) {

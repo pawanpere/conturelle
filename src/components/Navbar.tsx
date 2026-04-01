@@ -1,37 +1,42 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import CartDrawer from "./CartDrawer";
 
 export default function Navbar() {
   const { count, isOpen, setIsOpen } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
-      <nav className="fixed top-9 left-0 right-0 z-[100] px-6 md:px-12 py-5 flex items-start justify-between">
-        <Link href="/" className="no-underline">
-          <div className="font-[family-name:var(--font-cormorant)] text-[var(--cream)]">
-            <span className="block text-[28px] md:text-[32px] tracking-[0.05em] italic font-light leading-none">
-              Conturelle
-            </span>
-          </div>
+      <nav className={`fixed top-9 left-0 right-0 z-[100] px-6 md:px-12 py-4 flex items-center justify-between transition-all duration-300 ${scrolled ? "bg-[var(--dark)]/90 backdrop-blur-md shadow-[0_1px_0_rgba(201,169,110,0.1)]" : ""}`}>
+        <Link href="/" className="no-underline shrink-0">
+          <span className="font-[family-name:var(--font-cormorant)] text-[24px] md:text-[28px] tracking-[0.03em] italic font-light text-[var(--cream)] leading-none">
+            Conturelle
+          </span>
         </Link>
 
         {/* Desktop nav */}
-        <ul className="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-10 list-none">
+        <ul className="hidden lg:flex items-center gap-8 list-none whitespace-nowrap ml-12">
           {[
-            { href: "/#collection", label: "Shop All" },
+            { href: "/#collection", label: "Shop" },
             { href: "/#categories", label: "Categories" },
-            { href: "/#heritage", label: "Our Story" },
+            { href: "/#heritage", label: "Story" },
             { href: "/#fit-finder", label: "Fit Finder" },
           ].map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-[10px] tracking-[0.25em] uppercase text-[rgba(245,239,232,0.55)] no-underline transition-colors hover:text-[var(--gold)]"
+                className="text-[11px] tracking-[0.12em] uppercase text-[rgba(245,239,232,0.55)] no-underline transition-colors hover:text-[var(--gold)] whitespace-nowrap"
               >
                 {link.label}
               </Link>
@@ -39,7 +44,7 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 shrink-0 ml-auto">
           <button
             onClick={() => setIsOpen(true)}
             className="relative bg-transparent border-none cursor-pointer text-[var(--cream)]"
@@ -59,7 +64,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden bg-transparent border-none cursor-pointer flex flex-col gap-1.5"
+            className="lg:hidden bg-transparent border-none cursor-pointer flex flex-col gap-1.5"
             aria-label="Menu"
           >
             <span className={`block w-5 h-px bg-[var(--cream)] transition-transform ${mobileOpen ? "rotate-45 translate-y-[3px]" : ""}`} />
@@ -70,11 +75,11 @@ export default function Navbar() {
       </nav>
 
       {mobileOpen && (
-        <div className="fixed inset-0 z-[99] bg-[var(--dark)] pt-32 px-8 flex flex-col gap-8 md:hidden">
+        <div className="fixed inset-0 z-[99] bg-[var(--dark)] pt-32 px-8 flex flex-col gap-8 lg:hidden">
           {[
-            { href: "/#collection", label: "Shop All" },
+            { href: "/#collection", label: "Shop" },
             { href: "/#categories", label: "Categories" },
-            { href: "/#heritage", label: "Our Story" },
+            { href: "/#heritage", label: "Story" },
             { href: "/#fit-finder", label: "Fit Finder" },
           ].map((link) => (
             <Link

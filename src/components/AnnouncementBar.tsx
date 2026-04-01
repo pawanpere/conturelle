@@ -26,7 +26,7 @@ export default function AnnouncementBar() {
       {messages.map((msg, i) => (
         <span
           key={i}
-          className={`text-[10px] tracking-[0.3em] uppercase text-[var(--gold)] transition-opacity duration-500 ${
+          className={`text-[11px] tracking-[0.1em] uppercase text-[var(--gold)] transition-opacity duration-500 ${
             i === active ? "inline" : "hidden"
           }`}
         >

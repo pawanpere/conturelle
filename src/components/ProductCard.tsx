@@ -48,6 +48,11 @@ export default function ProductCard({ product }: { product: Product }) {
     }
   };
 
+  // Size range string
+  const sizeRange = product.bandSizes.length > 0 && product.cupSizes.length > 0
+    ? `${product.bandSizes[0]}${product.cupSizes[0]}–${product.bandSizes[product.bandSizes.length - 1]}${product.cupSizes[product.cupSizes.length - 1]}`
+    : null;
+
   return (
     <div className="group relative overflow-hidden bg-[var(--mid)] rounded-sm">
       <Link href={`/product/${product.slug}`} className="no-underline">
@@ -62,13 +67,11 @@ export default function ProductCard({ product }: { product: Product }) {
             />
           </div>
 
-          {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(21,8,16,0.7)] opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
 
-          {/* Badge */}
           {product.badge && (
             <div
-              className={`absolute top-4 left-4 text-[8px] tracking-[0.2em] uppercase px-2.5 py-1 z-[3] ${
+              className={`absolute top-3 left-3 text-[9px] tracking-[0.1em] uppercase px-2 py-0.5 z-[3] ${
                 product.badge === "bestseller"
                   ? "bg-[rgba(201,169,110,0.15)] text-[var(--gold)] border border-[rgba(201,169,110,0.3)]"
                   : product.badge === "new"
@@ -80,16 +83,15 @@ export default function ProductCard({ product }: { product: Product }) {
             </div>
           )}
 
-          {/* Quick add CTA */}
           <button
             onClick={handleQuickAdd}
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-3 text-[8px] tracking-[0.3em] uppercase text-[var(--cream)] whitespace-nowrap opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 border-b border-[rgba(245,239,232,0.5)] pb-1 bg-transparent cursor-pointer"
+            className="absolute bottom-5 left-1/2 -translate-x-1/2 translate-y-3 text-[9px] tracking-[0.12em] uppercase text-[var(--cream)] whitespace-nowrap opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 border-b border-[rgba(245,239,232,0.5)] pb-1 bg-transparent cursor-pointer"
           >
-            Quick Add +
+            {product.bandSizes.length > 0 ? "Select Size" : "Add to Cart"}
           </button>
         </div>
 
-        {/* Quick-add panel */}
+        {/* Quick-add size panel */}
         {quickAdd && (
           <div
             className="bg-[rgba(43,16,33,0.8)] p-3 px-4 border-t border-[rgba(201,169,110,0.1)]"
@@ -97,7 +99,7 @@ export default function ProductCard({ product }: { product: Product }) {
           >
             {product.bandSizes.length > 0 && (
               <div className="flex items-center gap-1 mb-2">
-                <span className="text-[8px] tracking-[0.2em] uppercase text-[rgba(245,239,232,0.4)] w-9">Band:</span>
+                <span className="text-[9px] tracking-[0.1em] uppercase text-[rgba(245,239,232,0.4)] w-9">Band:</span>
                 {product.bandSizes.map((s) => (
                   <button
                     key={s}
@@ -115,7 +117,7 @@ export default function ProductCard({ product }: { product: Product }) {
             )}
             {product.cupSizes.length > 0 && (
               <div className="flex items-center gap-1 mb-2">
-                <span className="text-[8px] tracking-[0.2em] uppercase text-[rgba(245,239,232,0.4)] w-9">Cup:</span>
+                <span className="text-[9px] tracking-[0.1em] uppercase text-[rgba(245,239,232,0.4)] w-9">Cup:</span>
                 {product.cupSizes.map((s) => (
                   <button
                     key={s}
@@ -134,7 +136,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <button
               onClick={handleAddToCart}
               disabled={product.bandSizes.length > 0 && (!selectedBand || !selectedCup)}
-              className="w-full py-2.5 bg-[var(--burgundy)] border border-[var(--burgundy)] text-[var(--cream)] text-[9px] tracking-[0.25em] uppercase cursor-pointer transition-all hover:bg-transparent hover:border-[var(--rose)] hover:text-[var(--rose)] disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-full py-2.5 bg-[var(--burgundy)] border border-[var(--burgundy)] text-[var(--cream)] text-[9px] tracking-[0.12em] uppercase cursor-pointer transition-all hover:bg-transparent hover:border-[var(--rose)] hover:text-[var(--rose)] disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Add to Cart
             </button>
@@ -142,29 +144,35 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
 
         {/* Product info */}
-        <div className="py-5 px-3 flex justify-between items-end">
+        <div className="py-4 px-3 flex justify-between items-end">
           <div>
-            <div className="font-[family-name:var(--font-cormorant)] text-xl font-light text-[var(--cream)] leading-tight">
-              <em className="italic text-[var(--terracotta)]">{product.name.split(" ")[0]}</em>{" "}
-              {product.name.split(" ").slice(1).join(" ")}
+            <div className="font-[family-name:var(--font-cormorant)] text-lg font-light text-[var(--cream)] leading-tight">
+              {product.name}
             </div>
-            <div className="text-[8px] tracking-[0.2em] text-[rgba(245,239,232,0.3)] uppercase mt-1">
+            <div className="text-[10px] text-[rgba(245,239,232,0.3)] mt-0.5">
               {product.subtitle}
             </div>
-            <div className="flex items-center gap-1 mt-1.5">
+            <div className="flex items-center gap-1.5 mt-1.5">
               <span className="text-[var(--star-gold)] text-[10px]">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-              <span className="text-[9px] text-[rgba(245,239,232,0.3)]">({product.reviewCount})</span>
+              <span className="text-[10px] text-[rgba(245,239,232,0.3)]">({product.reviewCount})</span>
             </div>
-            <div className="flex gap-1.5 mt-2">
+            {/* Color swatches — larger, with tooltips */}
+            <div className="flex gap-2 mt-2">
               {product.colors.map((c) => (
                 <span
                   key={c.name}
-                  className="w-3.5 h-3.5 rounded-full border border-[rgba(201,169,110,0.2)]"
+                  className="w-5 h-5 rounded-full border-2 border-[rgba(201,169,110,0.15)] hover:border-[var(--gold)] transition-colors cursor-pointer"
                   style={{ background: c.hex }}
                   title={c.name}
                 />
               ))}
             </div>
+            {/* Size availability */}
+            {sizeRange && (
+              <p className="text-[10px] text-[rgba(245,239,232,0.3)] mt-1.5">
+                Sizes {sizeRange}
+              </p>
+            )}
           </div>
           <div className="text-right">
             {product.originalPrice && (
